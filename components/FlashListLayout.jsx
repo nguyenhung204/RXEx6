@@ -6,45 +6,40 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const DATA = [
-    { id: '1', title: 'Cáp chuyển từ Cổng USB sang PS2', price: '69.900 đ', image: 'link_to_image_1' },
-    { id: '2', title: 'Cáp chuyển từ Cổng USB sang PS2', price: '69.900 đ', image: 'link_to_image_2' },
-    { id: '3', title: 'Cáp chuyển từ Cổng USB sang PS2', price: '69.900 đ', image: 'link_to_image_3' },
-    { id: '4', title: 'Cáp chuyển từ Cổng USB sang PS2', price: '69.900 đ', image: 'link_to_image_4' },
-    { id: '5', title: 'Cáp chuyển từ Cổng USB sang PS2', price: '69.900 đ', image: 'link_to_image_5' },
-    { id: '6', title: 'Cáp chuyển từ Cổng USB sang PS2', price: '69.900 đ', image: 'link_to_image_6' },
-    
+    { id: '1', title: 'Ca nấu lẩu, nấu mì mini...', price: 'Shop Devang', image: 'link_to_image_1' },
+    { id: '2', title: '1KG KHÔ GÀ BƠ TỎI ...', price: 'Shop LTD Food', image: 'link_to_image_2' },
+    { id: '3', title: 'Xe cần cẩu đa năng', price: 'Shop Thế giới đồ chơi', image: 'link_to_image_3' },
+    { id: '4', title: 'Đồ chơi dạng mô hình', price: 'Shop Thế giới đồ chơi', image: 'link_to_image_4' },
+    { id: '5', title: 'Lãnh đạo giản đơn', price: 'Shop Minh Long Book', image: 'link_to_image_5' },
+    { id: '6', title: 'Hiểu lòng con trẻ', price: 'Shop Minh Long Book', image: 'link_to_image_6' },
     // ... thêm các sản phẩm khác
 ];
 
-const FlashListGrid = () => {
+const FlashListLayout= () => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Ionicons name="arrow-back" size={28} color="white" />
-                <View >
-                <TextInput style={styles.searchInput} />
-                    <Ionicons style={styles.searchIcon} name="search-sharp" size={28} color="black" />
-                </View>
-
-                <View>
-                    <Ionicons name="cart-outline" size={28} color="white" />
-                </View>
-                <View>
-                    <MaterialCommunityIcons name="dots-horizontal" size={28} color="white" />
-                </View>
+                <Text style={{ color: '#FFFF' }}>Chat</Text>
+                <Ionicons name="cart-outline" size={28} color="white" />
             </View>
+            <Text style={{ padding: 20 }}>Bạn có thắc mắc gì với sản phẩm vừa xem. Đừng ngại chat với shop !</Text>
             <FlatList
                 data={DATA}
                 renderItem={({ item }) => (
                     <View style={styles.item}>
                         <Image source={{ uri: item.image }} style={styles.image} />
-                        <Text style={styles.title}>{item.title}</Text>
-                        <Text style={styles.price}>{item.price}</Text>
-                        <Text style={styles.rating}>⭐⭐⭐⭐⭐ (15)</Text>
+                        <View style={styles.itemInfo}>
+                            <Text style={styles.title}>{item.title}</Text>
+                            <Text style={styles.price}>{item.price}</Text>
+                        </View>
+                        <TouchableOpacity style={styles.chatButton}>
+                            <Text style={styles.chatButtonText}>Chat</Text>
+                        </TouchableOpacity>
                     </View>
                 )}
                 keyExtractor={item => item.id}
-                numColumns={2}
+                numColumns={1}
             />
             <View style={styles.navBar}>
                 <TouchableOpacity style={styles.navItem}>
@@ -66,7 +61,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f0f0f0',
         overflow: 'hidden',
-
     },
     header: {
         flexDirection: 'row',
@@ -76,56 +70,48 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between'
     },
-    searchInput: {
-        flex: 1,
-        paddingLeft: 40,
-        backgroundColor: '#fff',
+    item: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 5,
-        padding: 10,
-        width: '100%',
-        marginRight: 10,
-        position: 'relative'
-
-    },
-    searchIcon: {
-        position: 'absolute',
-        top: 5,
-        left: 10,
-        zIndex: 1
-    },
-    item: {
-        flex: 1,
-        margin: 10,
         backgroundColor: '#fff',
         borderRadius: 5,
         padding: 10,
-        alignItems: 'center',
+        marginVertical: 5,
+        marginHorizontal: 10,
     },
     image: {
-        width: '100%',
-        height: 100,
+        width: 80,
+        height: 80,
         resizeMode: 'contain',
+        marginRight: 10,
+    },
+    itemInfo: {
+        flex: 1,
     },
     title: {
         fontSize: 14,
         fontWeight: 'bold',
-        marginVertical: 5,
+        marginBottom: 5,
     },
     price: {
         fontSize: 12,
         color: '#888',
     },
-    rating: {
-        fontSize: 12,
-        color: '#FFD700', // Màu vàng cho sao
+    chatButton: {
+        backgroundColor: 'red',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+    },
+    chatButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
     },
     navBar: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: '#007bff', // Màu nền thanh điều hướng
+        backgroundColor: '#007bff',
         padding: 10,
     },
     navItem: {
@@ -134,4 +120,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default FlashListGrid;
+export default FlashListLayout;
